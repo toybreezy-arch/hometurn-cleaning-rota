@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#244238" />
+    <meta name="description" content="A simple shared household cleaning rota." />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>HomeTurn</title>
+  </head>
+  <body>
+    <main class="shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">SHARED HOUSEHOLD ROTA</p>
+          <h1>HomeTurn</h1>
+          <p class="intro">Keep the flat clean, fairly shared, and easy to follow.</p>
+        </div>
+        <button id="installButton" class="button secondary" hidden>Install app</button>
+      </header>
+
+      <section class="current card" aria-labelledby="current-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">THIS WEEK</p>
+            <h2 id="current-title"></h2>
+          </div>
+          <button id="notifyButton" class="button secondary">Enable reminders</button>
+        </div>
+        <div id="currentRota" class="assignments"></div>
+        <p class="subtle">One gentle reminder is scheduled for the morning your task is due.</p>
+      </section>
+
+      <section class="card" aria-labelledby="schedule-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">FIVE-WEEK CYCLE</p>
+            <h2 id="schedule-title">Upcoming rota</h2>
+          </div>
+          <p class="cycle-note">Repeats after 31 August</p>
+        </div>
+        <div id="schedule" class="schedule"></div>
+      </section>
+
+      <section class="two-column">
+        <article class="card" aria-labelledby="responsibilities-title">
+          <p class="eyebrow">WHAT EACH JOB INCLUDES</p>
+          <h2 id="responsibilities-title">Responsibilities</h2>
+          <div id="responsibilities" class="responsibilities"></div>
+        </article>
+
+        <article class="card" aria-labelledby="swap-title">
+          <p class="eyebrow">NEED A CHANGE?</p>
+          <h2 id="swap-title">Request a swap</h2>
+          <p class="subtle">Send the organiser a request. The rota only changes once it is approved.</p>
+          <form id="swapForm">
+            <label>Your name <select id="requester" required></select></label>
+            <label>Week <select id="week" required></select></label>
+            <label>Swap with <select id="swapWith" required></select></label>
+            <label>Note <textarea id="note" rows="3" placeholder="Optional: say what you need"></textarea></label>
+            <button class="button" type="submit">Send request</button>
+          </form>
+          <p id="formMessage" class="form-message" role="status"></p>
+        </article>
+      </section>
+
+      <section class="outdoors card">
+        <p class="eyebrow">SHARED JOB</p>
+        <h2>Front porch &amp; back garden</h2>
+        <p>Arrange these together every few weeks rather than assigning them as a weekly task.</p>
+      </section>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
