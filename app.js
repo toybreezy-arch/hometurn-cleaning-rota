@@ -1,6 +1,3 @@
-Exit code: 0
-Wall time: 0.6 seconds
-Output:
 const people = ["Segun", "Debo", "Toyo", "Prada"];
 const jobs = ["Bathroom & Toilet", "Living Room, Staircase & Bin", "Kitchen"];
 const rota = [
