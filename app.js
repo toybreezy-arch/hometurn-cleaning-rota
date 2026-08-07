@@ -4,8 +4,7 @@ const rota = [
   { date: "2026-08-03", assignments: ["Segun", "Debo", "Toyo"] },
   { date: "2026-08-10", assignments: ["Prada", "Toyo", "Segun"] },
   { date: "2026-08-17", assignments: ["Debo", "Segun", "Prada"] },
-  { date: "2026-08-24", assignments: ["Toyo", "Prada", "Debo"] },
-  { date: "2026-08-31", assignments: ["Segun", "Debo", "Toyo"] }
+  { date: "2026-08-24", assignments: ["Debo", "Toyo", "Prada"] }
 ];
 // From September onward, HomeTurn uses a shared balanced four-week cycle.
 // Over each cycle, every person has three jobs (one of each type) and one week off.
@@ -20,7 +19,7 @@ function balancedPeople(weekNumber) {
 }
 const futureRota = Array.from({ length: 104 }, (_, index) => ({
   date: addWeeks(rota[rota.length - 1].date, index + 1),
-  assignments: balancedPeople(index + 1)
+  assignments: balancedPeople(index + 2)
 }));
 const fullRota = [...rota, ...futureRota];
 const responsibilities = {
@@ -36,7 +35,7 @@ function currentIndex() { const first = weekDate(fullRota[0].date); const days =
 const active = currentIndex();
 document.querySelector("#current-title").textContent = `Week commencing ${dateFormat.format(weekDate(fullRota[active].date))}`;
 document.querySelector("#currentRota").innerHTML = fullRota[active].assignments.map((person,i) => `<div class="assignment"><span>${jobs[i]}</span><strong>${person}</strong></div>`).join("");
-document.querySelector("#schedule").innerHTML = fullRota.map((week,index) => `<article class="week ${index===active?"current-week":""}"><h3>From ${shortFormat.format(weekDate(week.date))}${index >= rota.length ? " Â· Balanced rota" : ""}</h3>${week.assignments.map((person,i)=>`<p><b>${jobs[i]}</b>${person}</p>`).join("")}</article>`).join("");
+document.querySelector("#schedule").innerHTML = fullRota.map((week,index) => `<article class="week ${index===active?"current-week":""}"><h3>From ${shortFormat.format(weekDate(week.date))}${index >= rota.length - 1 ? " · Balanced rota" : ""}</h3>${week.assignments.map((person,i)=>`<p><b>${jobs[i]}</b>${person}</p>`).join("")}</article>`).join("");
 document.querySelector("#responsibilities").innerHTML = Object.entries(responsibilities).map(([job,tasks]) => `<div class="responsibility"><h3>${job}</h3><ul>${tasks.map(task=>`<li>${task}</li>`).join("")}</ul></div>`).join("");
 for (const id of ["requester","swapWith"]) document.querySelector(`#${id}`).innerHTML = `<option value="" disabled selected>Select a name</option>${people.map(person=>`<option>${person}</option>`).join("")}`;
 document.querySelector("#week").innerHTML = fullRota.map(week=>`<option value="${week.date}">Week commencing ${dateFormat.format(weekDate(week.date))}</option>`).join("");
